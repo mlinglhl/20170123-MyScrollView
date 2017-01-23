@@ -33,26 +33,11 @@
     CGFloat width = self.firstView.bounds.size.width;
     CGFloat height = self.firstView.bounds.size.height;
     self.firstView.mySize = CGSizeMake(width, height + 200);
-    UIPanGestureRecognizer *pgr = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(scroll:)];
-    [self.firstView addGestureRecognizer:pgr];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-}
-
-- (void) scroll: (UIPanGestureRecognizer *) sender {
-    CGRect viewTranslation = self.firstView.bounds;
-    viewTranslation.origin.y = viewTranslation.origin.y - [sender translationInView:self.firstView].y;
-    if (viewTranslation.origin.y + self.firstView.frame.size.height > self.firstView.mySize.height) {
-        viewTranslation.origin.y = self.firstView.mySize.height - self.firstView.bounds.size.height;
-    }
-    if (viewTranslation.origin.y < 0) {
-        viewTranslation.origin.y = 0;
-    }
-    self.firstView.bounds = viewTranslation;
-    [sender setTranslation:CGPointZero inView:self.firstView];
 }
 
 @end

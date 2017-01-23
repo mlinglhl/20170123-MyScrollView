@@ -31,8 +31,8 @@
     [self.firstView addSubview:blueView];
     [self.firstView addSubview:yellowView];
     CGFloat width = self.firstView.bounds.size.width;
-    CGFloat height = self.firstView.bounds.size.height;
-    self.firstView.mySize = CGSizeMake(width, height + 200);
+    CGFloat height = yellowView.frame.origin.y + yellowView.frame.size.height;
+    self.firstView.mySize = CGSizeMake(width, height +10);
 }
 
 - (void)didReceiveMemoryWarning {

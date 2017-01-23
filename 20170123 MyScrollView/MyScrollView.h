@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  MyScrollView.h
 //  20170123 MyScrollView
 //
 //  Created by Minhung Ling on 2017-01-23.
@@ -7,10 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "MyScrollView.h"
 
-@interface ViewController : UIViewController
-@property MyScrollView *firstView;
+@interface MyScrollView : UIView
+
+@property CGSize mySize;
+@property UIPanGestureRecognizer *pgr;
 
 @end
-

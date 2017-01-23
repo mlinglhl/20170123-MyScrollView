@@ -16,14 +16,43 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
+    self.firstView = [[MyScrollView alloc] initWithFrame:self.view.bounds];
+    [self.view addSubview:self.firstView];
+    UIView *redView = [[UIView alloc] initWithFrame:CGRectMake(20, 20, 100, 100)];
+    redView.backgroundColor = [UIColor redColor];
+    UIView *greenView = [[UIView alloc] initWithFrame:CGRectMake(150, 150, 150, 150)];
+    greenView.backgroundColor = [UIColor greenColor];
+    UIView *blueView = [[UIView alloc] initWithFrame:CGRectMake(40, 400, 200, 150)];
+    blueView.backgroundColor = [UIColor blueColor];
+    UIView *yellowView = [[UIView alloc] initWithFrame:CGRectMake(100, 600, 180, 150)];
+    yellowView.backgroundColor = [UIColor yellowColor];
+    [self.firstView addSubview:redView];
+    [self.firstView addSubview:greenView];
+    [self.firstView addSubview:blueView];
+    [self.firstView addSubview:yellowView];
+    CGFloat width = self.firstView.bounds.size.width;
+    CGFloat height = self.firstView.bounds.size.height;
+    self.firstView.mySize = CGSizeMake(width, height + 200);
+    UIPanGestureRecognizer *pgr = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(scroll:)];
+    [self.firstView addGestureRecognizer:pgr];
 }
-
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
+- (void) scroll: (UIPanGestureRecognizer *) sender {
+    CGRect viewTranslation = self.firstView.bounds;
+    viewTranslation.origin.y = viewTranslation.origin.y - [sender translationInView:self.firstView].y;
+    if (viewTranslation.origin.y + self.firstView.frame.size.height > self.firstView.mySize.height) {
+        viewTranslation.origin.y = self.firstView.mySize.height - self.firstView.bounds.size.height;
+    }
+    if (viewTranslation.origin.y < 0) {
+        viewTranslation.origin.y = 0;
+    }
+    self.firstView.bounds = viewTranslation;
+    [sender setTranslation:CGPointZero inView:self.firstView];
+}
 
 @end
